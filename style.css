@@ -140,20 +140,6 @@ body {
   color: var(--clr-neutral-100);
 }
 
-section {
-  overflow-x: hidden;
-}
-
-.container {
-  --max-width: 1100px;
-  --padding-mobile: var(--size-400);
-  width: min(var(--max-width), calc(100% - 2 * var(--padding-mobile)));
-  margin-inline: auto;
-}
-.container:not(:has(nav)) {
-  min-height: 75vh;
-}
-
 .button {
   display: inline-flex;
   justify-content: center;
@@ -178,6 +164,20 @@ section {
 .button[data-invert] {
   background-color: var(--clr-neutral-100);
   color: var(--clr-primary-200);
+}
+
+.container {
+  --max-width: 1100px;
+  --padding-mobile: var(--size-400);
+  width: min(var(--max-width), calc(100% - 2 * var(--padding-mobile)));
+  margin-inline: auto;
+}
+
+section.hero-section {
+  min-height: 90vh;
+}
+section {
+  min-height: 100vh;
 }
 
 header {
@@ -218,111 +218,63 @@ nav *[aria-expanded="false"] + ul {
   background-position: -488px -1377px;
   z-index: -1;
 }
-section {
+section:not(.hero-section) {
   position: relative;
-  overflow: clip;
+  margin-block: var(--size-950);
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
-@media (min-width: 40em) {
-  .container .right img {
-    position: absolute;
-  }
-  .container .left img {
-    position: absolute;
-  }
+section .content img {
+  position: absolute;
+  top: var(--top, 0);
+  right: var(--right, auto);
+  left: var(--left, auto);
+  z-index: 100;
 }
 
-section .content:has(.right, .left) {
-  display: grid;
-  grid-template-areas:
-    "img"
-    "content";
+.content img {
+  max-width: revert;
 }
 
-section .content div:has(:not(picture)) {
-  grid-area: content;
-}
-section .content div:has(picture) {
-  grid-area: img;
-}
-
-@media (min-width: 40em) {
+@media (max-width: 40em) {
   section .content:has(.right, .left) {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "img"
+      "content";
   }
-  .grid-reverse {
-    grid-template-areas: "img content" !important;
+
+  section .content div:has(:not(picture)) {
+    grid-area: content;
   }
-  section .container .right img {
-    inset: 0;
-    width: fit-content;
-    margin: var(--size-700) -18% auto auto;
-  }
-  section .container .left img {
-    inset: 0;
-    width: fit-content;
-    margin: -2% auto 0 -18%;
+  section .content div:has(picture) {
+    grid-area: img;
   }
 }
 
-.overflow-image-wrapper {
-  position: relative;
-}
-
-.overflow-image-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  width: 1100px;
-  margin-inline: auto;
-  background-repeat: no-repeat;
-  background-position: 0px 106px;
-  background-image: url(images/illustration-phones.svg);
-  z-index: 99999;
-  zoom: 0.6;
-}
-
-@media (min-width: 40em) {
-  .overflow-image-wrapper::before {
-    zoom: 1;
-  }
-}
-
-.cta-wrapper .container {
-  min-height: 0;
-}
-@media (min-width: 40em) {
-  .cta-wrapper .container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  .cta-wrapper .container > div {
-    grid-column: 2;
-  }
-}
-
-.cta-wrapper {
-  position: relative;
-  background: linear-gradient(hsl(237, 23%, 32%), hsl(237, 17%, 21%));
-  border-radius: 0 var(--size-900) 0 var(--size-900);
-  overflow: clip;
+.cta {
+  margin-block: var(--size-800);
   isolation: isolate;
 }
-.cta-wrapper::before {
+
+.cta::before {
   content: "";
   inset: 0;
   position: absolute;
-  background: url("images/bg-pattern-circles.svg") no-repeat;
-  background-size: contain;
-  z-index: -1;
+  background: linear-gradient(hsl(237, 23%, 32%), hsl(237, 17%, 21%));
+  border-radius: 0 var(--size-900) 0 var(--size-900);
+  z-index: -100;
 }
-
-@media (min-width: 40em) {
-  .cta-wrapper::before {
-    background-position: -216px -500px;
-    background-size: auto;
-  }
+.cta::after {
+  content: "";
+  inset: 0;
+  position: absolute;
+  background-image: url(public/images/bg-pattern-circles.svg);
+  background-repeat: no-repeat;
+  border-radius: 0 var(--size-900) 0 var(--size-900);
+  background-position: -161px -559px;
+  z-index: -100;
 }
 
 footer {
@@ -509,7 +461,6 @@ footer img {
 
 .d-flex-even {
   display: flex;
-  flex-wrap: wrap;
 }
 .d-flex-even > * {
   flex-grow: 1;

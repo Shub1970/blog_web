@@ -8,7 +8,7 @@
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href=".//images/favicon-32x32.png"
+      href="./images/favicon-32x32.png"
     />
 
     <title>Frontend Mentor | [Blogr]</title>
@@ -111,7 +111,7 @@
     <header>
       <div class="container">
         <div class="logo">
-          <img src="/images/logo.svg" alt="" />
+          <img src="images/logo.svg" alt="" />
         </div>
         <nav class="main-nav">
           <ul class="d-flex" style="--gap: 20px" role="list">
@@ -167,7 +167,7 @@
       </div>
     </header>
 
-    <section class="hero-section">
+    <section class="hero-section | d-flex">
       <div class="container flow d-grid place-content-center">
         <h1 class="fs-primary-heading fw-bold txt-align-center">
           A modern publishing platform
@@ -181,14 +181,14 @@
         </div>
       </div>
     </section>
-    <section class="padding-block-1000">
+    <section class="padding-block-800">
       <div class="container">
         <h2
           class="txt-primary-900 fs-secondary-heading fw-semibold txt-align-center"
         >
           Designed for the future
         </h2>
-        <div class="content">
+        <div class="content d-flex-even align-items-center padding-block-950">
           <div class="left flow-recursive">
             <ul>
               <li>
@@ -221,43 +221,67 @@
             <picture>
               <source
                 media="(min-width:40em )"
-                srcset="/images/illustration-editor-desktop.svg"
+                srcset="images/illustration-editor-desktop.svg"
               />
-              <img src="/images/illustration-editor-mobile.svg" alt="" />
+              <img
+                src="publicimages/illustration-editor-mobile.svg"
+                alt=""
+                style="--right: -240px"
+              />
             </picture>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="overflow-image-wrapper | padding-block-1000">
-      <div class="cta-wrapper | padding-block-950">
-        <div class="container flow-recursive">
+    <section class="cta | padding-block-600" style="min-height: 0">
+      <div class="container">
+        <div class="content d-flex-even align-items-center padding-block-950">
+          <div class="left overflow-image-right">
+            <picture>
+              <source
+                media="(min-width:40em )"
+                srcset="images/illustration-phones.svg"
+              />
+              <img
+                src="public/images/illustration-laptop-desktop.svg"
+                alt=""
+                style="--top: -47px"
+              />
+            </picture>
+          </div>
           <div class="right flow-recursive">
-            <h2 class="fs-secondary-heading txt-neutral-100">
-              Robust content management
-            </h2>
-            <p class="txt-primary-400">
-              Flexible content management enables users to easily move through
-              posts. Increase the usability of your blog by adding customized
-              categories, sections, format, or flow. With this functionality,
-              you’re in full control.
-            </p>
+            <ul role="list">
+              <li>
+                <h3 class="fs-block-heading txt-neutral-100">
+                  State of the Art Infrastructure
+                </h3>
+                <p class="txt-primary-400">
+                  With reliability and speed in mind, worldwide data centers
+                  provide the backbone for ultra-fast connectivity. This ensures
+                  your site will load instantly, no matter where your readers
+                  are, keeping your site competitive.
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
-
-    <section class="padding-block-1000">
+    <section class="padding-block-800">
       <div class="container">
-        <div class="content grid-reverse">
-          <div class="left overflow-image-left">
+        <div class="content d-flex-even align-items-center padding-block-950">
+          <div class="left overflow-image-right">
             <picture>
               <source
                 media="(min-width:40em )"
-                srcset="/images/illustration-laptop-desktop.svg"
+                srcset="images/illustration-laptop-desktop.svg"
               />
-              <img src="/images/illustration-laptop-mobile.svg" alt="" />
+              <img
+                src="public/images/illustration-laptop-desktop.svg"
+                alt=""
+                style="--left: -240px"
+              />
             </picture>
           </div>
           <div class="right flow-recursive">
@@ -277,7 +301,7 @@
               </li>
               <li>
                 <h3 class="fs-block-heading txt-primary-900">
-                  FPowerful tooling
+                  Powerful tooling
                 </h3>
                 <p class="txt-primary-400">
                   Batteries included. We built a simple and straightforward CLI
@@ -294,7 +318,7 @@
     <footer class="bg-neutral-900 padding-block-950">
       <div class="container">
         <div class="logo">
-          <img src="/images/logo.svg" alt="" />
+          <img src="images/logo.svg" alt="" />
         </div>
         <nav class="main-nav">
           <ul role="list">
