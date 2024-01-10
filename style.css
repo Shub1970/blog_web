@@ -533,10 +533,18 @@ nav li:has(.login-button) {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: url(images/bg-pattern-intro-desktop.svg);
+  border-radius: 0 0 0 var(--size-900);
+  background-image: url(public/images/bg-pattern-intro-desktop.svg);
   background-repeat: no-repeat;
   background-position: -488px -1377px;
   z-index: -1;
+}
+
+@media (max-width: 40em) {
+  .hero-section::before {
+    background-image: url(public/images/bg-pattern-intro-mobile.svg);
+    background-position: -407px -273px;
+  }
 }
 section:not(.hero-section) {
   position: relative;
