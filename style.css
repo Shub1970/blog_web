@@ -309,6 +309,17 @@ svg {
   justify-content: center;
 }
 
+.stack-child {
+  display: grid;
+  grid-template-areas: "stack";
+  justify-items: center;
+  align-items: center;
+}
+
+.stack-child > * {
+  grid-area: stack;
+}
+
 /* -------------------------------general classs------------------------------------ */
 
 .visually-hidden {
@@ -345,13 +356,17 @@ body {
 }
 
 .button:where(:hover, :focus-visible) {
-  background-color: var(--clr-neutral-100);
+  background-color: hsl(0deg 14% 92% / 50%);
   color: var(--clr-primary-200);
 }
 
 .button[data-invert] {
   background-color: var(--clr-neutral-100);
   color: var(--clr-primary-200);
+}
+
+.button[data-invert]:where(:hover, :focus-visible) {
+  background-color: hsl(0deg 14% 92% / 50%);
 }
 
 .container {
@@ -384,51 +399,121 @@ header .container > * {
 header .container nav {
   flex-grow: 3;
 }
-nav *[aria-expanded="false"] + ul {
-  display: none;
+
+nav li:has(.login-button) {
+  margin-left: auto;
 }
 
 .mobile-nav-toggle {
+  width: 35px;
+  aspect-ratio: 1;
+  background: transparent;
+  border: 0;
   display: none;
 }
 
+.main-nav a {
+  position: relative;
+}
+
+.main-nav > ul > li > a[aria-expanded]::after {
+  content: url(public/images/icon-arrow-light.svg);
+  position: absolute;
+  margin-left: 10px;
+  transition: all 200ms ease-out;
+}
+.main-nav > ul > li > a[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+  transition: all 200ms ease-out;
+}
+
+.main-nav a[aria-expanded] + .sub-nav {
+  position: absolute;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: 0fr;
+  box-shadow: 55px 0px 0px white, -15px 0px 0px white;
+  background: white;
+  transition: grid-template-rows 200ms ease-out;
+}
+
+.main-nav .sub-nav > * {
+  overflow: hidden;
+}
+
+.main-nav a[aria-expanded="true"] + .sub-nav {
+  width: fit-content !important;
+  grid-template-rows: 1fr;
+  padding-block: 20px;
+  color: black;
+}
+
+.main-nav a:hover {
+  font-weight: var(--size-500);
+  text-decoration: underline;
+}
+
 @media (max-width: 40em) {
+  .content {
+    padding-block: 0px !important;
+  }
   header .container {
     justify-content: space-between;
+  }
+  .main-nav > ul > li > a[aria-expanded]::after {
+    content: url(public/images/icon-arrow-dark.svg);
   }
   header .container > * {
     flex-grow: 0;
   }
+
   .mobile-nav-toggle {
-    display: block;
+    display: grid;
   }
+
   .login-button {
-    display: none;
-  }
-
-  .icon-close {
-    display: none;
-  }
-
-  .icon-close.show {
-    display: block;
-    position: fixed;
-    z-index: 9999;
+    flex-wrap: wrap;
   }
 
   .mobile-nav-toggle[aria-expanded="false"] + .main-nav {
     display: none;
   }
 
+  .mobile-nav-toggle[aria-expanded] img {
+    display: none;
+  }
+  .mobile-nav-toggle[aria-expanded="false"] .hamburger {
+    display: block;
+  }
+
+  nav li:has(.login-button) {
+    margin-left: 0;
+  }
+
   .mobile-nav-toggle[aria-expanded="true"] + .main-nav {
+    --margin-inlin: 27px;
+    --margin-top: 65px;
     display: block;
     position: fixed;
-    inset: var(--size-400) var(--size-500) auto var(--size-500);
+    inset: var(--margin-top) var(--margin-inlin) auto var(--margin-inlin);
     padding: var(--size-600);
     background-color: var(--clr-neutral-100);
     color: var(--clr-primary-400);
   }
+
+  .main-nav a[aria-expanded] + .sub-nav {
+    width: 0;
+    --background-color: #e3e3e9;
+    --width-shadow: 45px;
+    --neg-width-shadow: calc(-1 * var(--width-shadow));
+    background: var(--background-color);
+    position: relative;
+    box-shadow: var(--width-shadow) 0 0 var(--background-color),
+      var(--neg-width-shadow) 0 0 var(--background-color);
+  }
+
   .main-nav ul {
+    --gap: 30px !important;
     display: grid;
     grid-auto-flow: row;
     justify-items: center;
@@ -518,6 +603,16 @@ section .content img {
   z-index: -100;
 }
 
+@media (max-width: 40em) {
+  .cta .content img {
+    top: -120px;
+  }
+  .cta .right {
+    position: relative;
+    top: -101px;
+  }
+}
+
 footer {
   border-radius: 0 var(--size-900) 0 0;
 }
@@ -548,5 +643,11 @@ footer img {
   footer nav > ul li {
     flex-grow: 1;
     flex-basis: 0;
+  }
+}
+
+@media (max-width: 40em) {
+  footer nav > ul .flow:not(:first-child) {
+    margin-top: 20px;
   }
 }
